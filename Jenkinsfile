@@ -27,6 +27,13 @@ pipeline {
       }
     }
 
+    stage('Security Audit') {
+      steps {
+        sh 'mkdir -p reports'
+        sh 'npm audit --audit-level=high --json > reports/npm-audit.json'
+      }
+    }
+
     stage('Generate Prisma Client') {
       steps {
         sh 'npm run prisma:generate'
@@ -35,7 +42,7 @@ pipeline {
 
     stage('Run Unit Tests') {
       steps {
-        sh 'npm run test'
+        sh 'npm run test:coverage'
       }
     }
 
@@ -67,7 +74,7 @@ pipeline {
   post {
     always {
       junit allowEmptyResults: true, testResults: 'reports/junit.xml'
-      archiveArtifacts artifacts: 'coverage/**', allowEmptyArchive: true
+      archiveArtifacts artifacts: 'coverage/**, reports/npm-audit.json', allowEmptyArchive: true
       sh 'docker logout || true'
     }
   }
