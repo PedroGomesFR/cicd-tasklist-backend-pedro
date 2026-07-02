@@ -4,12 +4,20 @@ pipeline {
   environment {
     CI = 'true'
     IMAGE_NAME = 'cicd-tasklist-backend-pedro'
+    PATH = '/opt/homebrew/bin:/usr/local/bin:/Applications/Docker.app/Contents/Resources/bin:/usr/bin:/bin:/usr/sbin:/sbin'
   }
 
   stages {
     stage('Checkout') {
       steps {
         checkout scm
+      }
+    }
+
+    stage('Verify Tools') {
+      steps {
+        sh 'which npm && npm -v'
+        sh 'which docker && docker --version'
       }
     }
 
