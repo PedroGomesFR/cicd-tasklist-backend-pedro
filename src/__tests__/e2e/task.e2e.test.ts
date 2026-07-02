@@ -34,11 +34,4 @@ describe("Task API E2E Tests", () => {
 			expect(res.body.completed).toBe(false);
 		});
 	});
-
-	// ... TODO: Add more tests
-	/*
-	describe("GET /api/tasks", () => {
-		...	
-	});
-	*/
 });
