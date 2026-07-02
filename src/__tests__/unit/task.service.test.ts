@@ -48,11 +48,4 @@ describe("TaskService", () => {
 			});
 		});
 	});
-
-	// ... TODO: Add more tests
-	/*
-	describe("findById", () => {
-		...	
-	});
-	*/
 });
