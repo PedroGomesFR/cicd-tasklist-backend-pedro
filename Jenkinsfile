@@ -47,9 +47,7 @@ pipeline {
 
     stage('Build Docker Image') {
       steps {
-        script {
-          dockerImage = docker.build("${env.IMAGE_NAME}:${env.BUILD_NUMBER}")
-        }
+        sh 'docker build -t ${IMAGE_NAME}:${BUILD_NUMBER} .'
       }
     }
 
